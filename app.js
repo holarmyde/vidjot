@@ -39,13 +39,6 @@ app.use(bodyParser.json());
 //Method Override Middleware
 app.use(methodOverride('_method'));
 
-// How middleware works
-//app.use(function(req, res, next){
-  // console.log(Date.now());
-  // req.name ='Femi Aremu';
-  // next();
-
-//});
 
 // Index Route
 app.get('/', (req, res) =>{
@@ -53,25 +46,22 @@ app.get('/', (req, res) =>{
     res.render('index', {
         title:title
     });
-    console.log(req.name);
 });
 
 // About Route
 app.get('/about', (req, res) => {
     res.render('about');
-
 });
 
 //Idea Index Page
 app.get('/ideas', (req, res) => {
-        Idea.find({})
-        .sort({date:'desc'})
-        .then(ideas => {
-            res.render('ideas/index', {
-                ideas,
-            });
+    Idea.find({})
+    .sort({date:'desc'})
+    .then(ideas => {
+        res.render('ideas/index', {
+            ideas,
         });
-    
+    });
 })
 
 // Add Idea Form
@@ -106,30 +96,31 @@ app.post('/ideas/:id', (req, res) => {
         errors.push({text:'Please add some details'});
     }
 
-    if(errors.length > 0){
-        res.render('ideas/add',{
-         errors: errors,
+    if(errors.length > 0)
+    {
+    res.render('ideas/add',{
+        errors: errors,
         title: req.body.title,
         details: req.body.details
-        });
+    });
 
-        } else {
-        //res.send('passed');
-        const newUser = {
+    } else {
+    //res.send('passed');
+    const newUser = {
 
-            title:req.body.title,
-            details:req.body.details,
-            user:req.body.details
-        }
-        new Idea(newUser)
-            .save()
-            .then(idea =>{
-                res.redirect('/ideas');
-            })
+        title:req.body.title,
+        details:req.body.details,
+        user:req.body.details
+    }
+    new Idea(newUser)
+        .save()
+        .then(idea =>{
+            res.redirect('/ideas');
+        })
     }
 });
 
-//Edit Form Process
+    //Edit Form Process
 app.put('/ideas/:id', (req, res) => {
     //res.send('PUT');
     Idea.findOne({
@@ -141,21 +132,19 @@ app.put('/ideas/:id', (req, res) => {
         idea.details = req.body.details;
 
         idea.save()
-          .then(idea => {
-              res.redirect('/ideas');
-          })
+        .then(idea => {
+            res.redirect('/ideas');
+        })
     });
 });
 
-// Delete Idea
-app.delete('/ideas/delete/:id', (req, res) => {
-    console.log("this url is working")
+    // Delete Idea
+app.delete('/delete/:id', (req, res) => {
     res.send('DELETE');
 });
 
 const port = 5000;
 
 app.listen(port, () =>{
-   console.log(`sever running on ${port}`)
-
+    console.log(`sever running on ${port}`)
 });
