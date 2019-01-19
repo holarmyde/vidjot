@@ -27,6 +27,7 @@ mongoose.Promise = global.Promise;
 
 //connect to mongoose
 mongoose.connect(db.mongoURI, {
+    //useMongoClient:true
     useNewUrlParser:true
 })
 
