@@ -4,7 +4,7 @@
        <p>{{details}}</p>
        <a class="btn btn-dark btn-block mb-2" 
        href="/ideas/edit/{{id}}">Edit</a>
-       <form action="/delete/{{id}}?_method=DELETE" method="post" id="delete-form">
+       <form action="/ideas/{{id}}?_method=DELETE" method="post" id="delete-form">
         <input type="hidden" name="_method" value="DELETE">
         <input type="submit" class="btn btn-danger btn-block" value="delete">
        </form>
