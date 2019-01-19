@@ -104,7 +104,6 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
 
     // Delete Idea
 router.delete('/:id', ensureAuthenticated, (req, res) => {
-    //res.send('DELETE');
     Idea.remove({_id: req.params.id})
        .then(() => {
            req.flash('success_msg', 'Video idea removed');
